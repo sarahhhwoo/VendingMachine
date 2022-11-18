@@ -22,16 +22,7 @@ public class InventoryInitialize {
         for(String eachLine : fileReaderObj.getItemStrings()) {
             String[] eachItemArray = eachLine.split(",");
             itemMap.put(eachItemArray[0], new Inventory(eachItemArray[1], new BigDecimal(eachItemArray[2]), eachItemArray[3]));
-            // for(String eachLine : fileReader.obj.getItemString) {
-//              String[] eachItemArray = eachLine.split(,);
-            //      mapOfItems.put( eachItemArray[0], new Inventory(name, price, type, quantity));
         }
-        //display entire inventory()
-        // for(String eachKey : mapOfItems) {
-        //     sout(eachKey.getName + " has " + eachKey)
-        //}
-
-
     }
 
 
