@@ -1,5 +1,7 @@
 package com.techelevator.models;
 
+import com.techelevator.application.Audit;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -7,6 +9,8 @@ public class Balance {
     //******add balance object to vendingmachine class
     private int itemBoughtCounter = 1;
     private BigDecimal currentBalance;
+
+    private Audit auditInBalance = new Audit();
 
 
     public Balance() {
@@ -24,23 +28,29 @@ public class Balance {
         } else {
             BigDecimal cashInBD = new BigDecimal(cashIn);
             currentBalance = currentBalance.add(cashInBD);
+            auditInBalance.auditWriterForMoneyFed(cashInBD, currentBalance);
 
         }
     }
 
     // added itemBought counter = 1 to top
     public void buyItem(Inventory inventory) {
+        BigDecimal initialBalance = currentBalance;
+        BigDecimal postPurchaseBalance = BigDecimal.ZERO;
         //also make sure that you don't allow purchase if the cost of the item is greater than the current balance. this is done in is it affordable
         if (itemBoughtCounter % 2 == 0) {
-            currentBalance = currentBalance.subtract(inventory.getPrice().subtract(BigDecimal.ONE));
+           postPurchaseBalance = currentBalance.subtract(inventory.getPrice().subtract(BigDecimal.ONE));
+
             System.out.println("Dispensing: " + inventory.getItemName() + ", cost: $" + inventory.getPrice().subtract(BigDecimal.ONE) + " remaining money: $" + currentBalance);
         } else {
-            currentBalance = currentBalance.subtract(inventory.getPrice());
+            postPurchaseBalance = currentBalance.subtract(inventory.getPrice());
             System.out.println("Dispensing: " + inventory.getItemName() + ", cost: $" + inventory.getPrice() + " remaining money: $" + currentBalance);
         }
         itemBoughtCounter++;
         int currentQuantity = inventory.getQuantity() - 1;
         inventory.setQuantity(currentQuantity);
+        auditInBalance.auditWriterForBuyItem(inventory, initialBalance, postPurchaseBalance);
+        currentBalance = postPurchaseBalance;
     }
 
     public boolean isItAffordable(Inventory inventory) {
@@ -65,6 +75,8 @@ public class Balance {
         int numOfNickels = 0;
 
 
+
+
         while (remainingCents >= QUARTER_VALUE) {
             remainingCents = remainingCents - QUARTER_VALUE;
             numOfQuarters++;
@@ -79,7 +91,8 @@ public class Balance {
         }
         System.out.println("Change returned:\n" + dollarBills + " Dollar(s), " + numOfQuarters + " Quarter(s), " + numOfDimes + " Dime(s), " + numOfNickels + " Nickel(s)");
         System.out.println("Total change given: $" + totalChange.setScale(2, RoundingMode.HALF_UP).doubleValue());
-        currentBalance = BigDecimal.ZERO;
+        currentBalance = totalChange.subtract(totalChange);
+        auditInBalance.auditWriterForReturnChange(totalChange, currentBalance);
         itemBoughtCounter = 1;
     }
 

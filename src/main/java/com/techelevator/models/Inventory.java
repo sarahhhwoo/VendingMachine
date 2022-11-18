@@ -12,10 +12,12 @@ public class Inventory {
     private BigDecimal price;
     private String itemName;
     private String type;
+    private String slot;
 
 
 
-  public Inventory(String itemName, BigDecimal price, String type) {
+  public Inventory(String slot, String itemName, BigDecimal price, String type) {
+      this.slot = slot;
       this.itemName = itemName;
       this.price = price;
       this.type = type;
@@ -26,6 +28,10 @@ public class Inventory {
 
     public void setQuantity(int quantity) {
       this.quantity = quantity;
+    }
+
+    public String getSlot() {
+      return slot;
     }
 
     public int getQuantity() {

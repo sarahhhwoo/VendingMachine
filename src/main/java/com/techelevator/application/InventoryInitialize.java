@@ -21,7 +21,7 @@ public class InventoryInitialize {
         fileReaderObj.readFile();
         for(String eachLine : fileReaderObj.getItemStrings()) {
             String[] eachItemArray = eachLine.split(",");
-            itemMap.put(eachItemArray[0], new Inventory(eachItemArray[1], new BigDecimal(eachItemArray[2]), eachItemArray[3]));
+            itemMap.put(eachItemArray[0], new Inventory(eachItemArray[0], eachItemArray[1], new BigDecimal(eachItemArray[2]), eachItemArray[3]));
         }
     }
 

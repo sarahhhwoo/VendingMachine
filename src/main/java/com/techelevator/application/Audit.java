@@ -15,11 +15,15 @@ public class Audit {
     DateTimeFormatter dateCorrectFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ss a ");
     String currentDateWFormat = dateAndTime.format(dateCorrectFormat);
 
+
     public Audit(){
     }
 
     public void auditWriterForMoneyFed(BigDecimal moneyPutIn, BigDecimal currentBalance) {
         try (PrintWriter auditWriter = new PrintWriter(new FileOutputStream("Audit.txt", true))) {
+            LocalDateTime dateAndTime = LocalDateTime.now();
+            DateTimeFormatter dateCorrectFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ss a ");
+            String currentDateWFormat = dateAndTime.format(dateCorrectFormat);
             auditWriter.println(currentDateWFormat + "MONEY FED: " + "           $" + moneyPutIn + "  $" + currentBalance);
             //when it needs to happen:
             //feed money           money put in   and total
@@ -34,19 +38,25 @@ public class Audit {
     // can change parameters to overload
 
     // MAYBE WE SHOULD ADD SLOT AS PART OF INVENTORY
-    public void auditWriterForBuyItem(Inventory inventory) {
+    public void auditWriterForBuyItem(Inventory inventory, BigDecimal initialBalance, BigDecimal postPurchase) {
         try (PrintWriter auditWriter = new PrintWriter(new FileOutputStream("Audit.txt", true))) {
-            auditWriter.println(currentDateWFormat + inventory.getItemName() + "        " + inventory.getSlot() + " $");
+            LocalDateTime dateAndTime = LocalDateTime.now();
+            DateTimeFormatter dateCorrectFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ss a ");
+            String currentDateWFormat = dateAndTime.format(dateCorrectFormat);
+            auditWriter.println(currentDateWFormat + inventory.getItemName() + "        " + inventory.getSlot() + " $" + initialBalance + " $" + postPurchase);
             auditWriter.flush();
             auditWriter.close();
         } catch (FileNotFoundException e) {
             System.out.println("Sorry no file found!");
         }
     }
-
-    public void auditWriterForReturnChange(BigDecimal totalChange) {
+        //AUDIT WRITER METHOD FOR "FINISH TRANSACTION"
+    public void auditWriterForReturnChange(BigDecimal totalChange, BigDecimal zeroBalance) {
         try (PrintWriter auditWriter = new PrintWriter(new FileOutputStream("Audit.txt", true))) {
-            auditWriter.println(currentDateWFormat + "CHANGE GIVEN:" + "       " + "$" + totalChange + "  $" + BigDecimal.ZERO.setScale(2));
+            LocalDateTime dateAndTime = LocalDateTime.now();
+            DateTimeFormatter dateCorrectFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ss a ");
+            String currentDateWFormat = dateAndTime.format(dateCorrectFormat);
+            auditWriter.println(currentDateWFormat + "CHANGE GIVEN:" + "       " + "$" + totalChange + "  $" + zeroBalance.setScale(2));
             auditWriter.flush();
             auditWriter.close();
         } catch (FileNotFoundException e) {
