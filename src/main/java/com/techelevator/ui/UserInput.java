@@ -49,6 +49,10 @@ public class UserInput {
         {
             return "exit";
         }
+        else if (option.equals("S"))
+        {
+            return "sales report";
+        }
         else
         {
             return "Unable to recognize input. Try again.";

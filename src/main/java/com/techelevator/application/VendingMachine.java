@@ -50,18 +50,15 @@ public class VendingMachine {
                         for (Map.Entry<String, Inventory> entry : iIObject.getItemMap().entrySet()) {
                             //if (entry.getValue.equals("0")
                             if (entry.getValue().getQuantity() >= 1) {
-                                System.out.println(entry.getKey() + " " + entry.getValue().getItemName() + " $" + entry.getValue().getPrice() + (" " + entry.getValue().getQuantity())); //remove getquantity
+                                System.out.println(entry.getKey() + " " + entry.getValue().getItemName() + " $" + entry.getValue().getPrice());
                             }
                         }
                         String itemCode = userInput.selectItemOption();
                         if (userInput.isItAvailable(iIObject.getItemMap(), itemCode)) {
                             Inventory inventory = iIObject.getItemMap().get(itemCode);
-                            // need to check if the person can afford it... maybe a boolean method in balance??
                             if (balanceObject.isItAffordable(inventory)) {
-                                //need to change the cost to reflect the discount, but balance.buyitem accounts for it already
-                                // Will add this to balance.buyItem to see if it works! - it worked System.out.println("Dispensing: " + inventory.getItemName() + ", cost: $" + inventory.getPrice() + " remaining money: $" + balanceObject.getCurrentBalance());
                                 balanceObject.buyItem(inventory);
-                                userOutput.displayItemTypeMessage(inventory); // change this for later.. where to put this???? maybe in useroutput?
+                                userOutput.displayItemTypeMessage(inventory);
                             } else {
                                 userOutput.displayMessage("Need to input more money!");
 
@@ -73,7 +70,11 @@ public class VendingMachine {
                         break;
                     }
                 }
-            } else if (choice.equals("exit")) {
+            } else if(choice.equals("sales report")) {
+                // run sales report here
+
+            }
+            else if (choice.equals("exit")) {
                 userOutput.displayGoodByeScreen();
                 break;
             }

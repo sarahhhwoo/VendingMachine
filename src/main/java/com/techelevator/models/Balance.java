@@ -77,8 +77,8 @@ public class Balance {
             remainingCents = remainingCents - NICKEL_VALUE;
             numOfNickels++;
         }
-        System.out.println("Change returned:\n " + dollarBills + " Dollar(s), " + numOfQuarters + " Quarter(s), " + numOfDimes + " Dime(s), " + numOfNickels + " Nickel(s)");
-        System.out.println("total change: $" + totalChange.doubleValue());
+        System.out.println("Change returned:\n" + dollarBills + " Dollar(s), " + numOfQuarters + " Quarter(s), " + numOfDimes + " Dime(s), " + numOfNickels + " Nickel(s)");
+        System.out.println("Total change given: $" + totalChange.setScale(2, RoundingMode.HALF_UP).doubleValue());
         currentBalance = BigDecimal.ZERO;
         itemBoughtCounter = 1;
     }
