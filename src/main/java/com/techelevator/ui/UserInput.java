@@ -1,7 +1,21 @@
 package com.techelevator.ui;
 
+<<<<<<< HEAD
 import com.techelevator.models.Inventory;
 import java.util.Map;
+=======
+<<<<<<< Updated upstream
+import com.techelevator.models.Balance;
+
+import java.math.BigDecimal;
+=======
+import com.techelevator.models.Inventory;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Map;
+>>>>>>> Stashed changes
+>>>>>>> jeff
 import java.util.Scanner;
 
 /**
@@ -47,7 +61,7 @@ public class UserInput {
     }
 
 
-    public String getPurchaseScreenOption(double currentBalance)
+    public String getPurchaseScreenOption(BigDecimal currentBalance)
     {
 
         System.out.println("M) Feed Money");
@@ -55,8 +69,18 @@ public class UserInput {
         System.out.println("F) Finish Transaction");
 
 
+<<<<<<< HEAD
         System.out.println();
         System.out.println("CURRENT MONEY PROVIDED: $" + currentBalance );
+=======
+<<<<<<< Updated upstream
+
+        System.out.print("CURRENT MONEY PROVIDED: $" + currentBalance );
+=======
+        System.out.println();
+        System.out.println("CURRENT MONEY PROVIDED: $" + currentBalance.setScale(2, RoundingMode.HALF_UP));
+>>>>>>> Stashed changes
+>>>>>>> jeff
         System.out.println();
         System.out.print("Please select an option: ");
         String selectedOption = scanner.nextLine();
@@ -90,13 +114,24 @@ public class UserInput {
         return cashIn;
     }
 
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+=======
+>>>>>>> jeff
     public String selectItemOption () {
         //list of items display
         System.out.println();
         System.out.println("Select item code: ");
         String itemCode = scanner.nextLine();
+<<<<<<< HEAD
         return itemCode;
     }
+=======
+        return itemCode.trim().toUpperCase();
+    }
+>>>>>>> Stashed changes
+>>>>>>> jeff
 
 // ===================================================================================
     public boolean isItAvailable(Map<String, Inventory> stock, String itemCode) {
