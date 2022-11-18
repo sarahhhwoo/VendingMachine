@@ -8,6 +8,11 @@ public class VendingMachineCLI
     {
         VendingMachine vendingMachine = new VendingMachine();
         vendingMachine.run();
+
+
+
+
+
     }
     
 }

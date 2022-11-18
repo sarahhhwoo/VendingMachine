@@ -1,8 +1,12 @@
 package com.techelevator.application;
 
+
+import com.techelevator.models.Balance;
+import com.techelevator.models.Inventory;
 import com.techelevator.ui.UserInput;
 import com.techelevator.ui.UserOutput;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 public class VendingMachine 
@@ -13,11 +17,13 @@ public class VendingMachine
         UserInput userInput = new UserInput();
         InventoryInitialize iIObject = new InventoryInitialize();
         iIObject.initializeInventory();
+        Balance balanceObject = new Balance();
 
         while(true)
         {
             userOutput.displayHomeScreen();
             String choice = userInput.getHomeScreenOption();
+
 
             if(choice.equals("display"))
             {
@@ -34,10 +40,17 @@ public class VendingMachine
                 // for(String eachKey : mapOfItems) {
                 //     sout(eachKey.getName + " has " + eachKey)
             }
-            else if(choice.equals("purchase"))
-            {
+            else if(choice.equals("purchase")){
+                while(true){
+                String purchaseMenu = userInput.getPurchaseScreenOption(balanceObject.getCurrentBalance().doubleValue());
+                if(purchaseMenu.equals("feed money")){
+                    balanceObject.addmoney(userInput.feedMoneyOption());
+                    System.out.println("Current Balance: $" + balanceObject.getCurrentBalance().doubleValue());
+                }
+
+                }}
                 // make a purchase
-            }
+
             else if(choice.equals("exit"))
             {
                 // good bye

@@ -1,5 +1,7 @@
 package com.techelevator.ui;
 
+import com.techelevator.models.Balance;
+
 import java.math.BigDecimal;
 import java.util.Scanner;
 
@@ -46,5 +48,47 @@ public class UserInput
 
     }
 
-    
+
+    public String getPurchaseScreenOption(double currentBalance)
+    {
+
+        System.out.println("M) Feed Money");
+        System.out.println("S) Select Item");
+        System.out.println("F) Finish Transaction");
+
+
+
+        System.out.print("CURRENT MONEY PROVIDED: $" + currentBalance );
+        System.out.println();
+        System.out.print("Please select an option: ");
+        String selectedOption = scanner.nextLine();
+        String option = selectedOption.trim().toUpperCase();
+
+        if (option.equals("M"))
+        {
+            return "feed money";
+        }
+        else if (option.equals("S"))
+        {
+            return "select item";
+        }
+        else if (option.equals("F"))
+        {
+            return "finish transaction";
+        }
+        else
+        {
+            return "";
+        }
+
+    }
+
+    public String feedMoneyOption () {
+
+        System.out.println("Please insert money");
+        String cashIn = scanner.nextLine();
+        return cashIn;
+
+
+    }
 }
