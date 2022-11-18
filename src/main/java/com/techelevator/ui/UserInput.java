@@ -1,10 +1,7 @@
 package com.techelevator.ui;
 
-import com.techelevator.models.Balance;
 import com.techelevator.models.Inventory;
-
-import java.math.BigDecimal;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -12,8 +9,7 @@ import java.util.Scanner;
  * 
  * Dependencies: None
  */
-public class UserInput
-{
+public class UserInput {
     private Scanner scanner = new Scanner(System.in);
 
     public String getHomeScreenOption()
@@ -45,7 +41,7 @@ public class UserInput
         }
         else
         {
-            return "";
+            return "Unable to recognize input. Try again.";
         }
 
     }
@@ -59,12 +55,13 @@ public class UserInput
         System.out.println("F) Finish Transaction");
 
 
-
-        System.out.print("CURRENT MONEY PROVIDED: $" + currentBalance );
+        System.out.println();
+        System.out.println("CURRENT MONEY PROVIDED: $" + currentBalance );
         System.out.println();
         System.out.print("Please select an option: ");
         String selectedOption = scanner.nextLine();
         String option = selectedOption.trim().toUpperCase();
+        System.out.println();
 
         if (option.equals("M"))
         {
@@ -80,25 +77,43 @@ public class UserInput
         }
         else
         {
-            return "";
+            return "Unable to recognize input. Try again.";
         }
 
     }
    @TODO //clean up formatting*********SET UP CONNECTION TO AUDIT
     public String feedMoneyOption () {
 
-        System.out.println("Please insert money:");
+        System.out.print("Please insert money:");
         String cashIn = scanner.nextLine();
+       System.out.println();
         return cashIn;
     }
-    public void selectItemOption () {
+
+    public String selectItemOption () {
         //list of items display
         System.out.println();
         System.out.println("Select item code: ");
         String itemCode = scanner.nextLine();
+        return itemCode;
     }
 
-    public String buttonPress(HashMap<String, Inventory> stock, String itemCode){
+// ===================================================================================
+    public boolean isItAvailable(Map<String, Inventory> stock, String itemCode) {
+        if(!stock.containsKey(itemCode)){
+            System.out.println("Please select a valid item");
+            return false;
+        }
+        else if(stock.get(itemCode).getQuantity() < 1) {
+            System.out.println("ITEM NO LONGER AVAILABLE");
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+  /*  public String buttonPress(HashMap<String, Inventory> stock, String itemCode){
         if(!stock.containsKey(itemCode)){
             System.out.println("Please select a valid item");
             return "purchase";
@@ -113,7 +128,7 @@ public class UserInput
         }
         return "purchase";
 
-    }
+    }*/
 
 
 
