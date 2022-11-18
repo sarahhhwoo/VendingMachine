@@ -40,10 +40,15 @@ public class Balance {
         //also make sure that you don't allow purchase if the cost of the item is greater than the current balance. this is done in is it affordable
         if (itemBoughtCounter % 2 == 0) {
            postPurchaseBalance = currentBalance.subtract(inventory.getPrice().subtract(BigDecimal.ONE));
+           int bogodoCounter = inventory.getSoldAtBOGODOPrice() + 1;
+           inventory.setSoldAtBOGODOPrice(bogodoCounter);
 
-            System.out.println("Dispensing: " + inventory.getItemName() + ", cost: $" + inventory.getPrice().subtract(BigDecimal.ONE) + " remaining money: $" + currentBalance);
+            System.out.println("Dispensing: " + inventory.getItemName() + ", cost(special BOGODO Price!): $" + inventory.getPrice().subtract(BigDecimal.ONE) + " remaining money: $" + currentBalance);
         } else {
             postPurchaseBalance = currentBalance.subtract(inventory.getPrice());
+            int normalPriceCounter = inventory.getSoldAtNormalPrice() + 1;
+            inventory.setSoldAtNormalPrice(normalPriceCounter);
+
             System.out.println("Dispensing: " + inventory.getItemName() + ", cost: $" + inventory.getPrice() + " remaining money: $" + currentBalance);
         }
         itemBoughtCounter++;
@@ -74,9 +79,6 @@ public class Balance {
         int numOfDimes = 0;
         int numOfNickels = 0;
 
-
-
-
         while (remainingCents >= QUARTER_VALUE) {
             remainingCents = remainingCents - QUARTER_VALUE;
             numOfQuarters++;
@@ -95,8 +97,5 @@ public class Balance {
         auditInBalance.auditWriterForReturnChange(totalChange, currentBalance);
         itemBoughtCounter = 1;
     }
-
-    //Audit?
-
 
 }

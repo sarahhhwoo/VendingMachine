@@ -95,7 +95,7 @@ public class UserInput {
         }
 
     }
-   @TODO //clean up formatting*********SET UP CONNECTION TO AUDIT
+   @TODO //clean up formatting*********
     public String feedMoneyOption () {
 
         System.out.print("Please insert money:");

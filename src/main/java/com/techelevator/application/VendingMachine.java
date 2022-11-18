@@ -19,6 +19,8 @@ public class VendingMachine {
         InventoryInitialize iIObject = new InventoryInitialize();
         iIObject.initializeInventory();
         Balance balanceObject = new Balance();
+        SalesReport salesReportObject = new SalesReport();
+                //CHANGE THAT NAME!!!!!!!!!!!!!!!!!!!!!!!!
 
         while (true) {
             userOutput.displayHomeScreen();
@@ -72,6 +74,8 @@ public class VendingMachine {
                 }
             } else if(choice.equals("sales report")) {
                 // run sales report here
+                userOutput.salesReportMessage();
+                salesReportObject.makeSalesReport(iIObject.getItemMap());
 
             }
             else if (choice.equals("exit")) {

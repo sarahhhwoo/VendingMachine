@@ -49,6 +49,10 @@ public class UserOutput {
         System.out.println();
     }
 
+    public void salesReportMessage(){
+        System.out.println("Sales Report Made. Hope you enjoyed the SECRET MENU!!");
+    }
+
     //============================================
     public void displayItemTypeMessage(Inventory inventory) {
         if (inventory.getType().equals("Munchy")) {

@@ -8,7 +8,6 @@ import java.util.*;
 public class InventoryInitialize {
     private Map<String, Inventory> itemMap = new TreeMap<>();
 
-    Inventory inventoryObject = new Inventory();
     FileReader fileReaderObj = new FileReader();
 
     public Map<String, Inventory> getItemMap() {
@@ -24,56 +23,5 @@ public class InventoryInitialize {
             itemMap.put(eachItemArray[0], new Inventory(eachItemArray[0], eachItemArray[1], new BigDecimal(eachItemArray[2]), eachItemArray[3]));
         }
     }
-
-
-
-
-
-
-    // ============================GRAVEYARD!!!!==========================================
-//    public String getItemName(String slot) {
-//        String returnName = "";
-//        for(Inventory eachObject : items){
-//            if(eachObject.getSlot().equals(slot)) {
-//                returnName = eachObject.getItemName();
-//            }
-//        }
-//        return returnName;
-//    }
-//    public BigDecimal getPrice(String slot) {
-//        BigDecimal returnPrice = BigDecimal.ZERO;
-//        for(Inventory eachObject : items){
-//            if(eachObject.getSlot().equals(slot)) {
-//                returnPrice = eachObject.getPrice();
-//            }
-//        }
-//        return returnPrice;
-//    }
-//
-//    public String getType(String slot){
-//        String returnType = "";
-//        for(Inventory eachObject : items){
-//            if(eachObject.getSlot().equals(slot)) {
-//                returnType = eachObject.getType();
-//            }
-//        }
-//        return returnType;
-//    }
-
-//    public int getQuantity(String slot){
-//        int returnQuantity = 0;
-//        for(Inventory eachObject : items){
-//            if(eachObject.getSlot().equals(slot)) {
-//                returnQuantity = eachObject.getQuantity();
-//            }
-//        }
-//        return returnQuantity;
-//    }
-//
-//    public List<Inventory> getItems() {
-//        return items;
-//    }
-
-
 
 }

@@ -13,6 +13,8 @@ public class Inventory {
     private String itemName;
     private String type;
     private String slot;
+    private int soldAtNormalPrice;
+    private int soldAtBOGODOPrice;
 
 
 
@@ -22,61 +24,55 @@ public class Inventory {
       this.price = price;
       this.type = type;
       this.quantity = quantity;
+      this.soldAtNormalPrice = 0;
+      this.soldAtBOGODOPrice = 0;
   }
     public Inventory(){
     }
 
     public void setQuantity(int quantity) {
+
       this.quantity = quantity;
     }
 
     public String getSlot() {
+
       return slot;
     }
 
     public int getQuantity() {
-        return quantity;
+
+      return quantity;
     }
 
     public BigDecimal getPrice() {
+
       return price;
     }
 
     public String getItemName() {
-        return itemName;
+
+      return itemName;
     }
 
     public String getType() {
-        return type;
+
+      return type;
     }
 
+    public int getSoldAtNormalPrice() {
+        return soldAtNormalPrice;
+    }
 
-    //    public Inventory() throws FileNotFoundException {
-//    }
-//
+    public void setSoldAtNormalPrice(int soldAtNormalPrice) {
+        this.soldAtNormalPrice = soldAtNormalPrice;
+    }
 
-//    }
-//
-//    public double getPrice(int index) {
-//        return Double.parseDouble(inventoryList.get(index)[2]);
-//    }
-//
-//    public String getSlotLocation(int index) {
-//        return inventoryList.get(index)[0];
-//    }
-//
-//    public String getItemName(int index) {
-//        return inventoryList.get(index)[1];
-//    }
-//
-//    public String getItemType(int index) {
-//        return inventoryList.get(index)[3];
-//    }
-//
-//    public String listAllInventory() {
-//        for(String[] eachArray: inventoryList){
-//            System.out.println(eachArray[1] + " has " + eachArray[4] + "snacks left over.");
-//        }
-//        return;
-//    }
+    public int getSoldAtBOGODOPrice() {
+        return soldAtBOGODOPrice;
+    }
+
+    public void setSoldAtBOGODOPrice(int soldAtBOGODOPrice) {
+        this.soldAtBOGODOPrice = soldAtBOGODOPrice;
+    }
 }
