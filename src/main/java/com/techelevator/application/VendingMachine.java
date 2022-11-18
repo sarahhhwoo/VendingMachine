@@ -46,6 +46,20 @@ public class VendingMachine
                 if(purchaseMenu.equals("feed money")){
                     balanceObject.addmoney(userInput.feedMoneyOption());
                     System.out.println("Current Balance: $" + balanceObject.getCurrentBalance().doubleValue());
+                } else if(purchaseMenu.equals("select item")){
+                    for(Map.Entry<String, Inventory> entry : iIObject.getItemMap().entrySet()){
+                        //if (entry.getValue.equals("0")
+                        if(entry.getValue().getQuantity() >= 1){
+                            System.out.println(entry.getKey() + " " + entry.getValue().getItemName() );
+                        }
+
+
+
+
+
+
+                } else if(purchaseMenu.equals("finish transaction")){
+
                 }
 
                 }}

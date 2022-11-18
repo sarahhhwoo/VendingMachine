@@ -1,8 +1,10 @@
 package com.techelevator.ui;
 
 import com.techelevator.models.Balance;
+import com.techelevator.models.Inventory;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -82,13 +84,39 @@ public class UserInput
         }
 
     }
-
+   @TODO //clean up formatting*********SET UP CONNECTION TO AUDIT
     public String feedMoneyOption () {
 
-        System.out.println("Please insert money");
+        System.out.println("Please insert money:");
         String cashIn = scanner.nextLine();
         return cashIn;
+    }
+    public void selectItemOption () {
+        //list of items display
+        System.out.println();
+        System.out.println("Select item code: ");
+        String itemCode = scanner.nextLine();
+    }
 
+    public String buttonPress(HashMap<String, Inventory> stock, String itemCode){
+        if(!stock.containsKey(itemCode)){
+            System.out.println("Please select a valid item");
+            return "purchase";
+        }
+        else if(stock.get(itemCode).getQuantity() < 1) {
+            System.out.println("ITEM NO LONGER AVAILABLE");
+            return "purchase";
+        }
+        else{
+            System.out.print(stock.get(itemCode).getItemName() + stock.get(itemCode).getPrice() + " ");
+            //RETURN TO THIS
+        }
+        return "purchase";
 
     }
+
+
+
+
+
 }
