@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.*;
 
 public class InventoryInitialize {
-    private Map<String, Inventory> itemMap = new HashMap<>();
+    private Map<String, Inventory> itemMap = new TreeMap<>();
 
     Inventory inventoryObject = new Inventory();
     FileReader fileReaderObj = new FileReader();

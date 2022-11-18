@@ -51,7 +51,6 @@ public class Balance {
             }
         }
 
-
     public void returnChange() {
         BigDecimal totalChange = currentBalance;
         int dollarBills = currentBalance.intValue();  // 3

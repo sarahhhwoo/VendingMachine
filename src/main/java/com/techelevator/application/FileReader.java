@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class FileReader {
     private List<String> itemStrings = new ArrayList<>();
-    File inventoryFile = new File("catering.csv");
+    File inventoryFile = new File("catering1.csv");
 
 
     public void readFile() {
