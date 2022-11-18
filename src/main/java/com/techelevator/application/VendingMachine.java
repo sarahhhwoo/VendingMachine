@@ -5,15 +5,11 @@ import com.techelevator.models.Balance;
 import com.techelevator.models.Inventory;
 import com.techelevator.ui.UserInput;
 import com.techelevator.ui.UserOutput;
-<<<<<<< HEAD
-=======
 
-<<<<<<< Updated upstream
 import java.math.BigDecimal;
-=======
+
 import java.math.RoundingMode;
->>>>>>> Stashed changes
->>>>>>> jeff
+
 import java.util.Map;
 
 public class VendingMachine {
@@ -43,25 +39,7 @@ public class VendingMachine {
                 }
                 // for(String eachKey : mapOfItems) {
                 //     sout(eachKey.getName + " has " + eachKey)
-<<<<<<< HEAD
-            } else if (choice.equals("purchase")) {
-                while (true) {
-                    userOutput.displayPurchaseScreen();
-                    String purchaseMenu = userInput.getPurchaseScreenOption(balanceObject.getCurrentBalance().doubleValue());
-                    if (purchaseMenu.equals("feed money")) {
-                        balanceObject.addmoney(userInput.feedMoneyOption());
-                        userOutput.displayMessage("Current Balance: $" + balanceObject.getCurrentBalance().doubleValue());
-=======
-<<<<<<< Updated upstream
-            }
-            else if(choice.equals("purchase")){
-                while(true){
-                String purchaseMenu = userInput.getPurchaseScreenOption(balanceObject.getCurrentBalance().doubleValue());
-                if(purchaseMenu.equals("feed money")){
-                    balanceObject.addmoney(userInput.feedMoneyOption());
-                    System.out.println("Current Balance: $" + balanceObject.getCurrentBalance().doubleValue());
-                }
-=======
+
             } else if (choice.equals("purchase")) {
                 while (true) {
                     userOutput.displayPurchaseScreen();
@@ -69,22 +47,16 @@ public class VendingMachine {
                     if (purchaseMenu.equals("feed money")) {
                         balanceObject.addmoney(userInput.feedMoneyOption());
                         userOutput.displayMessage("Current Balance: $" + balanceObject.getCurrentBalance().setScale(2, RoundingMode.HALF_UP));
->>>>>>> jeff
+
                     } else if (purchaseMenu.equals("select item")) {
                         for (Map.Entry<String, Inventory> entry : iIObject.getItemMap().entrySet()) {
                             //if (entry.getValue.equals("0")
                             if (entry.getValue().getQuantity() >= 1) {
-<<<<<<< HEAD
-                                System.out.println(entry.getKey() + " " + entry.getValue().getItemName());
-                            }
-=======
                                 System.out.println(entry.getKey() + " " + entry.getValue().getItemName() + " $" + entry.getValue().getPrice());
-                            }
->>>>>>> Stashed changes
->>>>>>> jeff
+                            }}
+
 
                             //===============================================================
-                        }
                         String itemCode = userInput.selectItemOption();
                         if (userInput.isItAvailable(iIObject.getItemMap(), itemCode)) {
                             Inventory inventory = iIObject.getItemMap().get(itemCode);
@@ -96,37 +68,22 @@ public class VendingMachine {
                                 userOutput.displayItemTypeMessage(inventory); // change this for later.. where to put this???? maybe in useroutput?
                             } else {
                                 userOutput.displayMessage("Need to input more money!");
-                            }
 
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-            else if(choice.equals("exit"))
-            {
-                // good bye
-=======
->>>>>>> jeff
+                                // dont forget to think about the sales report and audit text.
+                            }
                         }
-                        // dont forget to think about the sales report and audit text.
-                    }
-                    else if (purchaseMenu.equals("finish transaction")) {
+                        } else if (purchaseMenu.equals("finish transaction")) {
                         // return change
-<<<<<<< HEAD
-=======
+
                         balanceObject.returnChange();
->>>>>>> jeff
+
                         //set currentbalance to zero
                         //reference return change method (can do all these functions in that method)
                         break;
                     }
                 }
-              }
-            else if (choice.equals("exit")) {
+              } else if (choice.equals("exit")) {
                 userOutput.displayGoodByeScreen();
-<<<<<<< HEAD
-=======
->>>>>>> Stashed changes
->>>>>>> jeff
                 break;
             }
         }
