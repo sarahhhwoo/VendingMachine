@@ -19,32 +19,28 @@ public class Balance {
 
 
     public void addmoney(String cashIn) {
-
-
         if (!cashIn.equals("1") && !cashIn.equals("5") && !cashIn.equals("10") && !cashIn.equals("20")) {
             System.out.println("Not a valid bill value. Please put in a $1, $5, $10, or $20 bill.");
         } else {
             BigDecimal cashInBD = new BigDecimal(cashIn);
             currentBalance = currentBalance.add(cashInBD);
+
         }
     }
 
-
-    // =======================================
     // added itemBought counter = 1 to top
     public void buyItem(Inventory inventory) {
         //also make sure that you don't allow purchase if the cost of the item is greater than the current balance. this is done in is it affordable
         if (itemBoughtCounter % 2 == 0) {
             currentBalance = currentBalance.subtract(inventory.getPrice().subtract(BigDecimal.ONE));
             System.out.println("Dispensing: " + inventory.getItemName() + ", cost: $" + inventory.getPrice().subtract(BigDecimal.ONE) + " remaining money: $" + currentBalance);
-            // do something here to change the quantity
         } else {
             currentBalance = currentBalance.subtract(inventory.getPrice());
             System.out.println("Dispensing: " + inventory.getItemName() + ", cost: $" + inventory.getPrice() + " remaining money: $" + currentBalance);
-            // do something here to change the quantity
-
         }
         itemBoughtCounter++;
+        int currentQuantity = inventory.getQuantity() - 1;
+        inventory.setQuantity(currentQuantity);
     }
 
     public boolean isItAffordable(Inventory inventory) {
@@ -56,12 +52,10 @@ public class Balance {
         }
 
 
-    //if 3.60 remains
     public void returnChange() {
         BigDecimal totalChange = currentBalance;
         int dollarBills = currentBalance.intValue();  // 3
         BigDecimal coinsToReturn = currentBalance.subtract(new BigDecimal(dollarBills)); // 3.60 - 3 = 0.60
-        //the whole number will indicate the number of dollar bills to give back
 
         int remainingCents = (int) (coinsToReturn.doubleValue() * 100); // 60
         final int QUARTER_VALUE = 25;
@@ -91,13 +85,6 @@ public class Balance {
     }
 
     //Audit?
-
-    //Audit?
-
-
-
-
-    //*****BOGODO if i % 2 == 0 , price = price - $1
 
 
 }

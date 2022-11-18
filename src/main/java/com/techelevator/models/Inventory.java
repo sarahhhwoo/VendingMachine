@@ -22,8 +22,12 @@ public class Inventory {
       this.quantity = quantity;
   }
     public Inventory(){
-
     }
+
+    public void setQuantity(int quantity) {
+      this.quantity = quantity;
+    }
+
     public int getQuantity() {
         return quantity;
     }

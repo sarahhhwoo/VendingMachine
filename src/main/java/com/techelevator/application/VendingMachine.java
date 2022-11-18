@@ -37,8 +37,6 @@ public class VendingMachine {
                         System.out.println(entry.getKey() + " " + entry.getValue().getItemName() + " " + entry.getValue().getPrice());
                     }
                 }
-                // for(String eachKey : mapOfItems) {
-                //     sout(eachKey.getName + " has " + eachKey)
 
             } else if (choice.equals("purchase")) {
                 while (true) {
@@ -52,11 +50,9 @@ public class VendingMachine {
                         for (Map.Entry<String, Inventory> entry : iIObject.getItemMap().entrySet()) {
                             //if (entry.getValue.equals("0")
                             if (entry.getValue().getQuantity() >= 1) {
-                                System.out.println(entry.getKey() + " " + entry.getValue().getItemName() + " $" + entry.getValue().getPrice());
-                            }}
-
-
-                            //===============================================================
+                                System.out.println(entry.getKey() + " " + entry.getValue().getItemName() + " $" + entry.getValue().getPrice() + (" " + entry.getValue().getQuantity())); //remove getquantity
+                            }
+                        }
                         String itemCode = userInput.selectItemOption();
                         if (userInput.isItAvailable(iIObject.getItemMap(), itemCode)) {
                             Inventory inventory = iIObject.getItemMap().get(itemCode);
@@ -72,21 +68,15 @@ public class VendingMachine {
                                 // dont forget to think about the sales report and audit text.
                             }
                         }
-                        } else if (purchaseMenu.equals("finish transaction")) {
-                        // return change
-
+                    } else if (purchaseMenu.equals("finish transaction")) {
                         balanceObject.returnChange();
-
-                        //set currentbalance to zero
-                        //reference return change method (can do all these functions in that method)
                         break;
                     }
                 }
-              } else if (choice.equals("exit")) {
+            } else if (choice.equals("exit")) {
                 userOutput.displayGoodByeScreen();
                 break;
             }
         }
-
     }
 }
