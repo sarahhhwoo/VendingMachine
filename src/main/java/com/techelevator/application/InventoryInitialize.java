@@ -7,11 +7,9 @@ import java.util.*;
 
 public class InventoryInitialize {
     private Map<String, Inventory> itemMap = new TreeMap<>();
-
-    FileReader fileReaderObj = new FileReader();
+    private FileReader fileReaderObj = new FileReader();
 
     public Map<String, Inventory> getItemMap() {
-
         return itemMap;
     }
 
@@ -20,8 +18,8 @@ public class InventoryInitialize {
         fileReaderObj.readFile();
         for(String eachLine : fileReaderObj.getItemStrings()) {
             String[] eachItemArray = eachLine.split(",");
-            itemMap.put(eachItemArray[0], new Inventory(eachItemArray[0], eachItemArray[1], new BigDecimal(eachItemArray[2]), eachItemArray[3]));
+            Inventory putInMap = new Inventory(eachItemArray[0], eachItemArray[1], new BigDecimal(eachItemArray[2]), eachItemArray[3]);
+            itemMap.put(eachItemArray[0], putInMap);
         }
     }
-
 }

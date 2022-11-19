@@ -108,7 +108,7 @@ public class BalanceTest extends TestCase {
 
     }
 
-
+    @Test
     public void testBuyItemQuantityDecrement() {
         //Arrange
         Balance balanceTest = new Balance();
@@ -126,6 +126,7 @@ public class BalanceTest extends TestCase {
         Assert.assertEquals(expectedQuantity, actualQuantity);
     }
 
+    @Test
     public void testBuyItemCounterIncrement() {
         //Arrange
         Balance balanceTest = new Balance();
@@ -142,6 +143,7 @@ public class BalanceTest extends TestCase {
         Assert.assertEquals(expectedItemBoughtCounter, actual);
     }
 
+    @Test
     public void testBuyNormalCounter() {
         //Arrange
         Balance balanceTest = new Balance();
@@ -160,6 +162,7 @@ public class BalanceTest extends TestCase {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
     public void testBuyBOGODOCounter() {
         //Arrange
         Balance balanceTest = new Balance();
@@ -177,25 +180,28 @@ public class BalanceTest extends TestCase {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void testReturnChange() {
+        //Arrange
+        Balance balanceTest = new Balance();
+        int expectedDollars = 7;
+        int expectedQuarters = 2;
+        int expectedDimes = 1;
+        int expectedNickels = 1;
+        balanceTest.addMoney("10");
+        Inventory inventoryTest = new Inventory("A2", "Ginger Ayle", new BigDecimal(2.35), "Drink");
+        balanceTest.buyItem(inventoryTest);
+        balanceTest.returnChange();
 
+        int actualDollars = balanceTest.getDollarBills() ;
+        int actualQuarters = balanceTest.getNumOfQuarters() ;
+        int actualDimes = balanceTest.getNumOfDimes() ;
+        int actualNickels = balanceTest.getNumOfNickels() ;
 
-//    public void testReturnChange() {
-//        //Arrange
-//        Balance balanceTest = new Balance();
-//        int expectedDollars = ;
-//        int expectedQuarters = ;
-//        int expectedDimes = ;
-//        int expected = ;
-//        balanceTest.addMoney("10");
-//        Inventory inventoryTest = new Inventory("A2", "Ginger Ayle", new BigDecimal(2.15), "Drink");
-//
-//        //Act
-//        balanceTest.buyItem(inventoryTest);
-//        balanceTest.buyItem(inventoryTest);
-//        balanceTest.buyItem(inventoryTest);
-//
-//
-//
-//
-//    }
+        Assert.assertEquals("There should be 7 dollars", expectedDollars, actualDollars);
+        Assert.assertEquals("There should be 2 Quarters", expectedQuarters, actualQuarters);
+        Assert.assertEquals("There should be 1 Dime", expectedDimes, actualDimes);
+        Assert.assertEquals("There should be 1 Nickel", expectedNickels, actualNickels);
+    }
+
 }

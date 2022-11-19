@@ -1,14 +1,9 @@
 package com.techelevator.models;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 public class Inventory {
-    private int quantity = 6;
+    private int quantity;
     private BigDecimal price;
     private String itemName;
     private String type;
@@ -16,19 +11,15 @@ public class Inventory {
     private int soldAtNormalPrice;
     private int soldAtBOGODOPrice;
 
-
-
   public Inventory(String slot, String itemName, BigDecimal price, String type) {
       this.slot = slot;
       this.itemName = itemName;
       this.price = price;
       this.type = type;
-      this.quantity = quantity;
+      this.quantity = 6;
       this.soldAtNormalPrice = 0;
       this.soldAtBOGODOPrice = 0;
   }
-    public Inventory(){
-    }
 
     public void setQuantity(int quantity) {
 

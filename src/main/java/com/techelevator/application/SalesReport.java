@@ -6,43 +6,45 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class SalesReport {
-
-
-    String salesReportLocation = "C:\\Users\\Student\\workspace\\java-orange-minicapstonemodule1-team8\\";
-    LocalDateTime dateAndTime = LocalDateTime.now();
-    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMMMddyy_hhmma");
-    String formattedDateTime = dateAndTime.format(dateFormat);
-    File salesReport = new File(salesReportLocation + formattedDateTime + "_SalesReport.txt");
+    private String salesReportLocation = "C:\\Users\\Student\\workspace\\java-orange-minicapstonemodule1-team8\\";
+    private DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMMMddyy_hhmma");
 
     public void makeSalesReport(Map<String, Inventory> itemMap) {
-        try (PrintWriter salesReportWriter = new PrintWriter(new FileOutputStream(salesReport, true))) {
+        // takes current date/time and uses format from above to create unique files names whenever this method is called.
+        LocalDateTime dateAndTime = LocalDateTime.now();
+        String formattedDateTime = dateAndTime.format(dateFormat);
+        File salesReport = new File(salesReportLocation + formattedDateTime + "_SalesReport.txt");
 
+        try (PrintWriter salesReportWriter = new PrintWriter(new FileOutputStream(salesReport, true))) {
             salesReportWriter.println("Taste Elevator Sales Report");
             BigDecimal sumBD = BigDecimal.ZERO;
 
+            // iterate through Map to access each Value(Inventory) of the map
             for (Map.Entry<String, Inventory> entry : itemMap.entrySet()) {
-                salesReportWriter.println(entry.getValue().getItemName() + "|" + entry.getValue().getSoldAtNormalPrice() + "|" + entry.getValue().getSoldAtBOGODOPrice());
-                BigDecimal normalTotal = entry.getValue().getPrice().multiply(new BigDecimal(entry.getValue().getSoldAtNormalPrice()));
-                BigDecimal bogodoTotal = (entry.getValue().getPrice().subtract(BigDecimal.ONE)).multiply(new BigDecimal(entry.getValue().getSoldAtBOGODOPrice()));
+                // create variables for cleaner aesthetic
+                String eachValueName = entry.getValue().getItemName();
+                BigDecimal eachValuePrice = entry.getValue().getPrice();
+                int eachValueSoldAtNormalPrice = entry.getValue().getSoldAtNormalPrice();
+                int eachValueSoldAtBogodoPrice = entry.getValue().getSoldAtBOGODOPrice();
 
+                // print a line with name of Inventory object and items sold and normal vs sale price
+                salesReportWriter.println(eachValueName + "|" + eachValueSoldAtNormalPrice + "|" + eachValueSoldAtBogodoPrice);
+                //calculate total money made from items sold from this Inventory object and add to sum
+                BigDecimal normalTotal = eachValuePrice.multiply(new BigDecimal(eachValueSoldAtNormalPrice));
+                BigDecimal bogodoTotal = (eachValuePrice.subtract(BigDecimal.ONE)).multiply(new BigDecimal(eachValueSoldAtBogodoPrice));
                 sumBD = sumBD.add((normalTotal.add(bogodoTotal)));
             }
-            salesReportWriter.println("TOTAL SALES " + sumBD.setScale(2));
+            //print total sales, after foreach loop finishes, to complete sales report
+            salesReportWriter.println("TOTAL SALES " + sumBD.setScale(2, RoundingMode.HALF_UP));
             salesReportWriter.flush();
-            salesReportWriter.close();
-
         } catch (Exception e) {
             System.out.println("Audit File not able to be written");
         }
-
-
     }
-
-
 }

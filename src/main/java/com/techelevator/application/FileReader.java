@@ -28,5 +28,4 @@ public class FileReader {
     public List<String> getItemStrings() {
         return itemStrings;
     }
-
 }

@@ -2,16 +2,8 @@ package com.techelevator.ui;
 
 import com.techelevator.models.Inventory;
 import java.util.Map;
-import com.techelevator.models.Balance;
-
-import java.math.BigDecimal;
-
-import com.techelevator.models.Inventory;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Map;
-
 import java.util.Scanner;
 
 /**
@@ -117,8 +109,6 @@ public class UserInput {
         return itemCode.trim().toUpperCase();
     }
 
-
-//======================================================================
     public boolean isItAvailable(Map<String, Inventory> stock, String itemCode) {
         if(!stock.containsKey(itemCode)){
             System.out.println("Please select a valid item");
