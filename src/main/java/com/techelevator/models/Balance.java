@@ -14,6 +14,7 @@ public class Balance {
 
 
     public Balance() {
+
         this.currentBalance = BigDecimal.ZERO;
     }
 
@@ -22,7 +23,7 @@ public class Balance {
     }
 
 
-    public void addmoney(String cashIn) {
+    public void addMoney(String cashIn) {
         if (!cashIn.equals("1") && !cashIn.equals("5") && !cashIn.equals("10") && !cashIn.equals("20")) {
             System.out.println("Not a valid bill value. Please put in a $1, $5, $10, or $20 bill.");
         } else {
@@ -43,13 +44,13 @@ public class Balance {
            int bogodoCounter = inventory.getSoldAtBOGODOPrice() + 1;
            inventory.setSoldAtBOGODOPrice(bogodoCounter);
 
-            System.out.println("Dispensing: " + inventory.getItemName() + ", cost(special BOGODO Price!): $" + inventory.getPrice().subtract(BigDecimal.ONE) + " remaining money: $" + currentBalance);
+            System.out.println("Dispensing: " + inventory.getItemName() + ", cost(special BOGODO Price!): $" + inventory.getPrice().subtract(BigDecimal.ONE) + " remaining money: $" + postPurchaseBalance);
         } else {
             postPurchaseBalance = currentBalance.subtract(inventory.getPrice());
             int normalPriceCounter = inventory.getSoldAtNormalPrice() + 1;
             inventory.setSoldAtNormalPrice(normalPriceCounter);
 
-            System.out.println("Dispensing: " + inventory.getItemName() + ", cost: $" + inventory.getPrice() + " remaining money: $" + currentBalance);
+            System.out.println("Dispensing: " + inventory.getItemName() + ", cost: $" + inventory.getPrice() + " remaining money: $" + postPurchaseBalance);
         }
         itemBoughtCounter++;
         int currentQuantity = inventory.getQuantity() - 1;
@@ -92,7 +93,7 @@ public class Balance {
             numOfNickels++;
         }
         System.out.println("Change returned:\n" + dollarBills + " Dollar(s), " + numOfQuarters + " Quarter(s), " + numOfDimes + " Dime(s), " + numOfNickels + " Nickel(s)");
-        System.out.println("Total change given: $" + totalChange.setScale(2, RoundingMode.HALF_UP).doubleValue());
+        System.out.println("Total change given: $" + totalChange.setScale(2, RoundingMode.HALF_UP));
         currentBalance = totalChange.subtract(totalChange);
         auditInBalance.auditWriterForReturnChange(totalChange, currentBalance);
         itemBoughtCounter = 1;

@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -24,7 +25,7 @@ public class Audit {
             LocalDateTime dateAndTime = LocalDateTime.now();
             DateTimeFormatter dateCorrectFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ss a ");
             String currentDateWFormat = dateAndTime.format(dateCorrectFormat);
-            auditWriter.println(currentDateWFormat + "MONEY FED: " + "           $" + moneyPutIn + "  $" + currentBalance);
+            auditWriter.println(currentDateWFormat + "MONEY FED: " + "         $" + moneyPutIn.setScale(2) + " $" + currentBalance.setScale(2));
             //when it needs to happen:
             //feed money           money put in   and total
             //purchase item     slot balance before and after purchase
@@ -35,15 +36,21 @@ public class Audit {
             System.out.println("Sorry no file found!");
         }
     }
-    // can change parameters to overload
 
-    // MAYBE WE SHOULD ADD SLOT AS PART OF INVENTORY
     public void auditWriterForBuyItem(Inventory inventory, BigDecimal initialBalance, BigDecimal postPurchase) {
+        int width = 17;
+        char fill = ' ';
+        String itemName = inventory.getItemName();
+        String padding = new String(new char[width - itemName.length()]).replace('\0', fill);
+
+
         try (PrintWriter auditWriter = new PrintWriter(new FileOutputStream("Audit.txt", true))) {
             LocalDateTime dateAndTime = LocalDateTime.now();
             DateTimeFormatter dateCorrectFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ss a ");
             String currentDateWFormat = dateAndTime.format(dateCorrectFormat);
-            auditWriter.println(currentDateWFormat + inventory.getItemName() + "        " + inventory.getSlot() + " $" + initialBalance + " $" + postPurchase);
+
+            auditWriter.println(currentDateWFormat + itemName + padding +  inventory.getSlot() + " $" + initialBalance.setScale(2) + " $" + postPurchase.setScale(2));
+
             auditWriter.flush();
             auditWriter.close();
         } catch (FileNotFoundException e) {
@@ -56,7 +63,7 @@ public class Audit {
             LocalDateTime dateAndTime = LocalDateTime.now();
             DateTimeFormatter dateCorrectFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ss a ");
             String currentDateWFormat = dateAndTime.format(dateCorrectFormat);
-            auditWriter.println(currentDateWFormat + "CHANGE GIVEN:" + "       " + "$" + totalChange + "  $" + zeroBalance.setScale(2));
+            auditWriter.println(currentDateWFormat + "CHANGE GIVEN:" + "       " + "$" + totalChange + " $" + zeroBalance.setScale(2));
             auditWriter.flush();
             auditWriter.close();
         } catch (FileNotFoundException e) {

@@ -20,13 +20,13 @@ public class SalesReport {
     String formattedDateTime = dateAndTime.format(dateFormat);
     File salesReport = new File(salesReportLocation + formattedDateTime + "_SalesReport.txt");
 
-    public void makeSalesReport(Map<String, Inventory> itemMap){
-        try(PrintWriter salesReportWriter = new PrintWriter(new FileOutputStream(salesReport, true))){
+    public void makeSalesReport(Map<String, Inventory> itemMap) {
+        try (PrintWriter salesReportWriter = new PrintWriter(new FileOutputStream(salesReport, true))) {
 
             salesReportWriter.println("Taste Elevator Sales Report");
             BigDecimal sumBD = BigDecimal.ZERO;
 
-            for (Map.Entry<String, Inventory> entry : itemMap.entrySet()){
+            for (Map.Entry<String, Inventory> entry : itemMap.entrySet()) {
                 salesReportWriter.println(entry.getValue().getItemName() + "|" + entry.getValue().getSoldAtNormalPrice() + "|" + entry.getValue().getSoldAtBOGODOPrice());
                 BigDecimal normalTotal = entry.getValue().getPrice().multiply(new BigDecimal(entry.getValue().getSoldAtNormalPrice()));
                 BigDecimal bogodoTotal = (entry.getValue().getPrice().subtract(BigDecimal.ONE)).multiply(new BigDecimal(entry.getValue().getSoldAtBOGODOPrice()));
@@ -37,18 +37,12 @@ public class SalesReport {
             salesReportWriter.flush();
             salesReportWriter.close();
 
-        } catch(Exception e){
-            System.out.println("File not Made");
+        } catch (Exception e) {
+            System.out.println("Audit File not able to be written");
         }
 
 
     }
-
-
-
-
-
-
 
 
 }

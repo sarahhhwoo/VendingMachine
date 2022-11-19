@@ -20,7 +20,7 @@ public class VendingMachine {
         iIObject.initializeInventory();
         Balance balanceObject = new Balance();
         SalesReport salesReportObject = new SalesReport();
-                //CHANGE THAT NAME!!!!!!!!!!!!!!!!!!!!!!!!
+        //CHANGE THAT NAME!!!!!!!!!!!!!!!!!!!!!!!!
 
         while (true) {
             userOutput.displayHomeScreen();
@@ -28,25 +28,28 @@ public class VendingMachine {
 
 
             if (choice.equals("display")) {
-                userOutput.displayDisplayVIScreen();
-                // display the vending machine slots
-                // iIObject.initializeInventory();
-                for (Map.Entry<String, Inventory> entry : iIObject.getItemMap().entrySet()) {
-                    //if (entry.getValue.equals("0")
-                    if (entry.getValue().getQuantity() < 1) {
-                        System.out.println(entry.getKey() + " " + entry.getValue().getItemName() + " NO LONGER AVAILABLE");
-                    } else {
-                        System.out.println(entry.getKey() + " " + entry.getValue().getItemName() + " " + entry.getValue().getPrice());
+                while (true) {
+                    userOutput.displayDisplayVIScreen();
+                    // display the vending machine slots
+                    // iIObject.initializeInventory();
+                    for (Map.Entry<String, Inventory> entry : iIObject.getItemMap().entrySet()) {
+                        //if (entry.getValue.equals("0")
+                        if (entry.getValue().getQuantity() < 1) {
+                            System.out.println(entry.getKey() + " " + entry.getValue().getItemName() + " NO LONGER AVAILABLE");
+                        } else {
+                            System.out.println(entry.getKey() + " " + entry.getValue().getItemName() + " " + entry.getValue().getPrice());
+                        }
                     }
+                    userInput.displayReturnHomeOption();
+                    break;
                 }
-
             } else if (choice.equals("purchase")) {
                 while (true) {
                     userOutput.displayPurchaseScreen();
                     String purchaseMenu = userInput.getPurchaseScreenOption(balanceObject.getCurrentBalance().setScale(2, RoundingMode.HALF_UP));
                     if (purchaseMenu.equals("feed money")) {
-                        balanceObject.addmoney(userInput.feedMoneyOption());
-                        userOutput.displayMessage("Current Balance: $" + balanceObject.getCurrentBalance().setScale(2, RoundingMode.HALF_UP));
+                        balanceObject.addMoney(userInput.feedMoneyOption());
+                        userOutput.displayMessage("New Balance: $" + balanceObject.getCurrentBalance().setScale(2, RoundingMode.HALF_UP));
 
                     } else if (purchaseMenu.equals("select item")) {
                         for (Map.Entry<String, Inventory> entry : iIObject.getItemMap().entrySet()) {
@@ -64,7 +67,6 @@ public class VendingMachine {
                             } else {
                                 userOutput.displayMessage("Need to input more money!");
 
-                                // dont forget to think about the sales report and audit text.
                             }
                         }
                     } else if (purchaseMenu.equals("finish transaction")) {
@@ -72,13 +74,12 @@ public class VendingMachine {
                         break;
                     }
                 }
-            } else if(choice.equals("sales report")) {
+            } else if (choice.equals("sales report")) {
                 // run sales report here
                 userOutput.salesReportMessage();
                 salesReportObject.makeSalesReport(iIObject.getItemMap());
 
-            }
-            else if (choice.equals("exit")) {
+            } else if (choice.equals("exit")) {
                 userOutput.displayGoodByeScreen();
                 break;
             }

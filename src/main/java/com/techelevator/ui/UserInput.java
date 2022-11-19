@@ -69,7 +69,7 @@ public class UserInput {
         System.out.println("F) Finish Transaction");
 
         System.out.println();
-        System.out.println("CURRENT MONEY PROVIDED: $" + currentBalance.setScale(2, RoundingMode.HALF_UP));
+        System.out.println("CURRENT BALANCE: $" + currentBalance.setScale(2, RoundingMode.HALF_UP));
 
         System.out.println();
         System.out.print("Please select an option: ");
@@ -93,12 +93,19 @@ public class UserInput {
         {
             return "Unable to recognize input. Try again.";
         }
+    }
+
+    public void displayReturnHomeOption(){
+        System.out.println();
+        System.out.print("Press any key to return to HomeScreen: ");
+        String selectedOption = scanner.nextLine();
+        String option = selectedOption.trim().toUpperCase();
 
     }
-   @TODO //clean up formatting*********
+
     public String feedMoneyOption () {
 
-        System.out.print("Please insert money:");
+        System.out.print("Please insert money: ");
         String cashIn = scanner.nextLine();
        System.out.println();
         return cashIn;
@@ -113,7 +120,7 @@ public class UserInput {
     }
 
 
-// ===================================================================================
+//======================================================================
     public boolean isItAvailable(Map<String, Inventory> stock, String itemCode) {
         if(!stock.containsKey(itemCode)){
             System.out.println("Please select a valid item");
@@ -127,26 +134,4 @@ public class UserInput {
             return true;
         }
     }
-
-  /*  public String buttonPress(HashMap<String, Inventory> stock, String itemCode){
-        if(!stock.containsKey(itemCode)){
-            System.out.println("Please select a valid item");
-            return "purchase";
-        }
-        else if(stock.get(itemCode).getQuantity() < 1) {
-            System.out.println("ITEM NO LONGER AVAILABLE");
-            return "purchase";
-        }
-        else{
-            System.out.print(stock.get(itemCode).getItemName() + stock.get(itemCode).getPrice() + " ");
-            //RETURN TO THIS
-        }
-        return "purchase";
-
-    }*/
-
-
-
-
-
 }
