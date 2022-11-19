@@ -99,4 +99,7 @@ public class Balance {
         itemBoughtCounter = 1;
     }
 
+    public void setItemBoughtCounter(int integer){
+        this.itemBoughtCounter = integer;
+    }
 }
