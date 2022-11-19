@@ -98,9 +98,7 @@ public class UserInput {
     public void displayReturnHomeOption(){
         System.out.println();
         System.out.print("Press any key to return to HomeScreen: ");
-        String selectedOption = scanner.nextLine();
-        String option = selectedOption.trim().toUpperCase();
-
+        scanner.nextLine();
     }
 
     public String feedMoneyOption () {

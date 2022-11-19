@@ -20,13 +20,14 @@ public class VendingMachine {
         iIObject.initializeInventory();
         Balance balanceObject = new Balance();
         SalesReport salesReportObject = new SalesReport();
-        //CHANGE THAT NAME!!!!!!!!!!!!!!!!!!!!!!!!
+
 
         while (true) {
+            //HOME SCREEN
             userOutput.displayHomeScreen();
             String choice = userInput.getHomeScreenOption();
 
-
+            //DISPLAY ITEMS SCREEN
             if (choice.equals("display")) {
                 while (true) {
                     userOutput.displayDisplayVIScreen();
@@ -41,16 +42,19 @@ public class VendingMachine {
                         }
                     }
                     userInput.displayReturnHomeOption();
-                    break;
+                    break; // returns to Home Screen
                 }
+                //Purchase Screen Main
             } else if (choice.equals("purchase")) {
                 while (true) {
                     userOutput.displayPurchaseScreen();
                     String purchaseMenu = userInput.getPurchaseScreenOption(balanceObject.getCurrentBalance().setScale(2, RoundingMode.HALF_UP));
+                    //Feed Money Screen
                     if (purchaseMenu.equals("feed money")) {
                         balanceObject.addMoney(userInput.feedMoneyOption());
-                        userOutput.displayMessage("New Balance: $" + balanceObject.getCurrentBalance().setScale(2, RoundingMode.HALF_UP));
+                        userOutput.displayMessage("New Balance: $" + balanceObject.getCurrentBalance().setScale(2, RoundingMode.HALF_UP)); //returns to Purchase Screen Main
 
+                                //Select Item Screen
                     } else if (purchaseMenu.equals("select item")) {
                         for (Map.Entry<String, Inventory> entry : iIObject.getItemMap().entrySet()) {
                             //if (entry.getValue.equals("0")
@@ -67,13 +71,14 @@ public class VendingMachine {
                             } else {
                                 userOutput.displayMessage("Need to input more money!");
 
-                            }
+                            } //Returns to Purchase Screen Main after each selection
                         }
                     } else if (purchaseMenu.equals("finish transaction")) {
                         balanceObject.returnChange();
-                        break;
+                        break; // returns to Purchase Screen Main
                     }
                 }
+                //Secret option to create sales report
             } else if (choice.equals("sales report")) {
                 // run sales report here
                 userOutput.salesReportMessage();

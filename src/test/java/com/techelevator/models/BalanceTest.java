@@ -49,26 +49,26 @@ public class BalanceTest extends TestCase {
     }
 
     @Test
-    public void testIsItAffordableHappyPathCounter1() {
+    public void testIsItAffordableHappyPathNormal() {
         Balance balanceTest = new Balance();
         balanceTest.setItemBoughtCounter(1);
         balanceTest.addMoney("5");
-        Inventory inventoryTest = new Inventory("B1", "Stackers", new BigDecimal(2.65), "Munchy");
+        Inventory inventoryTest = new Inventory("B1", "Stackers", new BigDecimal(0.99), "Munchy");
         Assert.assertTrue("This should be true", balanceTest.isItAffordable(inventoryTest));
 
     }
 
     @Test
-    public void testIsItAffordableHappyPathCounter2() {
+    public void testIsItAffordableHappyPathBOGODO() {
         Balance balanceTest = new Balance();
         balanceTest.setItemBoughtCounter(2);
         balanceTest.addMoney("1");
-        Inventory inventoryTest = new Inventory("A2", "Ginger Ayle", new BigDecimal(1.85), "Drink");
+        Inventory inventoryTest = new Inventory("A2", "Ginger Ayle", new BigDecimal(1.99), "Drink");
         Assert.assertTrue("This should be true", balanceTest.isItAffordable(inventoryTest));
     }
 
     @Test
-    public void testNotAffordableCounter3() {
+    public void testNotAffordableNormal() {
         Balance balanceTest = new Balance();
         balanceTest.setItemBoughtCounter(3);
         balanceTest.addMoney("1");
@@ -78,7 +78,7 @@ public class BalanceTest extends TestCase {
     }
 
     @Test
-    public void testIsItAffordableNotAffordableCounter4() {
+    public void testIsItAffordableNotAffordableBOGODO() {
         Balance balanceTest = new Balance();
         balanceTest.setItemBoughtCounter(4);
         balanceTest.addMoney("1");
@@ -87,21 +87,115 @@ public class BalanceTest extends TestCase {
     }
 
     @Test
-    public void testIsItAffordableEqualValuesCounter5() {
+    public void testIsItAffordableEqualValuesNormal() {
+        Balance balanceTest = new Balance();
+        balanceTest.setItemBoughtCounter(3);
+        balanceTest.addMoney("1");
+        balanceTest.addMoney("1");
+        Inventory inventoryTest = new Inventory("C3", "Moonpie", new BigDecimal(2.00), "Candy");
+        Assert.assertTrue("This should be true", balanceTest.isItAffordable(inventoryTest));
 
     }
 
     @Test
-    public void testIsItAffordableEqualValuesCounter6() {
+    public void testIsItAffordableEqualValuesBOGODO() {
+        Balance balanceTest = new Balance();
+        balanceTest.setItemBoughtCounter(4);
+        balanceTest.addMoney("1");
+        Inventory inventoryTest = new Inventory("A2", "Ginger Ayle", new BigDecimal(2.00), "Drink");
+
+        Assert.assertTrue("This should be true", balanceTest.isItAffordable(inventoryTest));
 
     }
 
 
-    public void testBuyItem() {
+    public void testBuyItemQuantityDecrement() {
+        //Arrange
+        Balance balanceTest = new Balance();
+        balanceTest.setItemBoughtCounter(1);
+        int expectedQuantity = 4;
+        balanceTest.addMoney("5");
+        Inventory inventoryTest = new Inventory("A2", "Ginger Ayle", new BigDecimal(2.00), "Drink");
+
+        //Act
+        balanceTest.buyItem(inventoryTest);
+        balanceTest.buyItem(inventoryTest);
+        int actualQuantity = inventoryTest.getQuantity();
+
+        //Assert
+        Assert.assertEquals(expectedQuantity, actualQuantity);
+    }
+
+    public void testBuyItemCounterIncrement() {
+        //Arrange
+        Balance balanceTest = new Balance();
+        int expectedItemBoughtCounter = 3;
+        balanceTest.addMoney("5");
+        Inventory inventoryTest = new Inventory("A2", "Ginger Ayle", new BigDecimal(2.00), "Drink");
+
+        //Act
+        balanceTest.buyItem(inventoryTest);
+        balanceTest.buyItem(inventoryTest);
+        int actual = balanceTest.getItemBoughtCounter();
+
+        //Assert
+        Assert.assertEquals(expectedItemBoughtCounter, actual);
+    }
+
+    public void testBuyNormalCounter() {
+        //Arrange
+        Balance balanceTest = new Balance();
+        int expected = 2;
+        balanceTest.addMoney("10");
+        Inventory inventoryTest = new Inventory("A2", "Ginger Ayle", new BigDecimal(2.00), "Drink");
+
+        //Act
+        balanceTest.buyItem(inventoryTest);
+        balanceTest.buyItem(inventoryTest);
+        balanceTest.buyItem(inventoryTest);
+        balanceTest.buyItem(inventoryTest);
+        int actual = inventoryTest.getSoldAtNormalPrice();
+
+        //Assert
+        Assert.assertEquals(expected, actual);
+    }
+
+    public void testBuyBOGODOCounter() {
+        //Arrange
+        Balance balanceTest = new Balance();
+        int expected = 1;
+        balanceTest.addMoney("10");
+        Inventory inventoryTest = new Inventory("A2", "Ginger Ayle", new BigDecimal(2.00), "Drink");
+
+        //Act
+        balanceTest.buyItem(inventoryTest);
+        balanceTest.buyItem(inventoryTest);
+        balanceTest.buyItem(inventoryTest);
+        int actual = inventoryTest.getSoldAtBOGODOPrice();
+
+        //Assert
+        Assert.assertEquals(expected, actual);
     }
 
 
 
-    public void testReturnChange() {
-    }
+//    public void testReturnChange() {
+//        //Arrange
+//        Balance balanceTest = new Balance();
+//        int expectedDollars = ;
+//        int expectedQuarters = ;
+//        int expectedDimes = ;
+//        int expected = ;
+//        balanceTest.addMoney("10");
+//        Inventory inventoryTest = new Inventory("A2", "Ginger Ayle", new BigDecimal(2.15), "Drink");
+//
+//        //Act
+//        balanceTest.buyItem(inventoryTest);
+//        balanceTest.buyItem(inventoryTest);
+//        balanceTest.buyItem(inventoryTest);
+//
+//
+//
+//
+//    }
 }

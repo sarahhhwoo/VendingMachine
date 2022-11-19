@@ -11,11 +11,11 @@ public class InventoryInitialize {
     FileReader fileReaderObj = new FileReader();
 
     public Map<String, Inventory> getItemMap() {
+
         return itemMap;
     }
-// made new file,
-    // if quantity == 0, then print out "This item is not available"
 
+    //takes in information from FileReader, splits information into String[]. Then stores each item in TreeMap, with slot number as key and Inventory object as value.
     public void initializeInventory() {
         fileReaderObj.readFile();
         for(String eachLine : fileReaderObj.getItemStrings()) {
